@@ -15,14 +15,14 @@ export default async function handler(req, res) {
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
+        'anthropic-version': '2023-06-01',
+        'anthropic-beta': 'interleaved-thinking-2025-05-14'
       },
       body: JSON.stringify(req.body)
     });
 
     const data = await response.json();
-    if (!response.ok) return res.status(response.status).json(data);
-    res.status(200).json(data);
+    res.status(response.status).json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
